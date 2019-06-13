@@ -1,0 +1,19 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/danielgomes/Documents/Workspace/start/shared/src/main/AndroidManifest.xml:1:1-2:41
+INJECTED from /Users/danielgomes/Documents/Workspace/start/shared/src/main/AndroidManifest.xml:1:1-2:41
+INJECTED from /Users/danielgomes/Documents/Workspace/start/shared/src/main/AndroidManifest.xml:1:1-2:41
+	package
+		ADDED from /Users/danielgomes/Documents/Workspace/start/shared/src/main/AndroidManifest.xml:2:11-38
+		INJECTED from /Users/danielgomes/Documents/Workspace/start/shared/src/main/AndroidManifest.xml
+		INJECTED from /Users/danielgomes/Documents/Workspace/start/shared/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/danielgomes/Documents/Workspace/start/shared/src/main/AndroidManifest.xml:1:11-69
+uses-sdk
+INJECTED from /Users/danielgomes/Documents/Workspace/start/shared/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/danielgomes/Documents/Workspace/start/shared/src/main/AndroidManifest.xml
+INJECTED from /Users/danielgomes/Documents/Workspace/start/shared/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/danielgomes/Documents/Workspace/start/shared/src/main/AndroidManifest.xml
+		ADDED from /Users/danielgomes/Documents/Workspace/start/shared/src/main/AndroidManifest.xml
+		INJECTED from /Users/danielgomes/Documents/Workspace/start/shared/src/main/AndroidManifest.xml
