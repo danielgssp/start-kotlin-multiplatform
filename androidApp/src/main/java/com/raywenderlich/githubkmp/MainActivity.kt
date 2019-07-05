@@ -2,13 +2,18 @@ package com.raywenderlich.githubkmp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.raywenderlich.Db
 import com.raywenderlich.Greeting
 import com.raywenderlich.api.UpdateProblem
+import com.raywenderlich.database.dao.PersonDao
+import com.raywenderlich.database.dto.PersonDto
 import com.raywenderlich.model.Member
 import com.raywenderlich.presentation.MembersPresenter
 import com.raywenderlich.presentation.MembersView
+import getInstance
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), MembersView {
@@ -20,6 +25,12 @@ class MainActivity : AppCompatActivity(), MembersView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val db = Db.getInstance(this)
+        val personDao = PersonDao(db)
+
+        personDao.insert(PersonDto("Daniel","Male"))
+        Log.d("database",  "${personDao.select()}")
 
         greeting.text = Greeting().greeting()
 

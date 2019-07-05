@@ -1,0 +1,12 @@
+CREATE TABLE Person (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    genre TEXT
+);
+
+insertItem:
+INSERT OR FAIL INTO Person(name, genre) VALUES (?, ?);
+
+selectAll:
+SELECT *
+FROM Person;

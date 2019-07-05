@@ -1,8 +1,8 @@
 #import <Foundation/Foundation.h>
 
-@class SharedGreeting, SharedUpdateProblem, SharedKotlinThrowable, SharedKotlinArray, SharedGitHubApi, SharedCoroutinePresenter, SharedMember, SharedKotlinUnit, SharedMembersPresenter, SharedMemberCompanion, SharedMember$serializer, SharedMembersDataRepository, SharedKotlinx_serialization_runtime_nativeEnumDescriptor, SharedKotlinx_serialization_runtime_nativeSerialKind, SharedKotlinNothing, SharedKotlinx_serialization_runtime_nativeUpdateMode, SharedKotlinx_serialization_runtime_nativeSerialClassDescImpl, SharedKotlinEnum;
+@class SharedKotlinUnit, SharedSqldelight_runtimeTransacterTransaction, SharedMyDatabaseCompanion, SharedPersonImpl, SharedSqldelight_runtimeQuery, SharedGreeting, SharedDatabase, SharedUpdateProblem, SharedKotlinThrowable, SharedKotlinArray, SharedGitHubApi, SharedPersonDao, SharedPersonDto, SharedCoroutinePresenter, SharedMember, SharedMembersPresenter, SharedMemberCompanion, SharedMember$serializer, SharedMembersDataRepository, SharedKotlinx_serialization_runtime_nativeEnumDescriptor, SharedKotlinx_serialization_runtime_nativeSerialKind, SharedKotlinNothing, SharedKotlinx_serialization_runtime_nativeUpdateMode, SharedKotlinByteArray, SharedKotlinx_serialization_runtime_nativeSerialClassDescImpl, SharedKotlinEnum, SharedKotlinByteIterator;
 
-@protocol SharedBaseView, SharedKotlinx_coroutines_coreCoroutineScope, SharedKotlinCoroutineContext, SharedDataRepository, SharedMembersView, SharedKotlinx_serialization_runtime_nativeKSerializer, SharedKotlinx_serialization_runtime_nativeGeneratedSerializer, SharedKotlinx_serialization_runtime_nativeSerializationStrategy, SharedKotlinx_serialization_runtime_nativeEncoder, SharedKotlinx_serialization_runtime_nativeSerialDescriptor, SharedKotlinx_serialization_runtime_nativeDeserializationStrategy, SharedKotlinx_serialization_runtime_nativeDecoder, SharedKotlinIterator, SharedKotlinCoroutineContextElement, SharedKotlinCoroutineContextKey, SharedKotlinx_serialization_runtime_nativeCompositeEncoder, SharedKotlinx_serialization_runtime_nativeSerialModule, SharedKotlinAnnotation, SharedKotlinx_serialization_runtime_nativeCompositeDecoder, SharedKotlinx_serialization_runtime_nativeSerialModuleCollector, SharedKotlinKClass, SharedKotlinComparable, SharedKotlinKDeclarationContainer, SharedKotlinKAnnotatedElement, SharedKotlinKClassifier;
+@protocol SharedMyDatabase, SharedPersonQueries, SharedSqldelight_runtimeTransacter, SharedSqldelight_runtimeSqlDriver, SharedSqldelight_runtimeSqlDriverSchema, SharedPerson, SharedBaseView, SharedKotlinx_coroutines_coreCoroutineScope, SharedKotlinCoroutineContext, SharedDataRepository, SharedMembersView, SharedKotlinx_serialization_runtime_nativeKSerializer, SharedKotlinx_serialization_runtime_nativeGeneratedSerializer, SharedKotlinx_serialization_runtime_nativeSerializationStrategy, SharedKotlinx_serialization_runtime_nativeEncoder, SharedKotlinx_serialization_runtime_nativeSerialDescriptor, SharedKotlinx_serialization_runtime_nativeDeserializationStrategy, SharedKotlinx_serialization_runtime_nativeDecoder, SharedSqldelight_runtimeSqlPreparedStatement, SharedSqldelight_runtimeSqlCursor, SharedSqldelight_runtimeCloseable, SharedSqldelight_runtimeQueryListener, SharedKotlinIterator, SharedKotlinCoroutineContextElement, SharedKotlinCoroutineContextKey, SharedKotlinx_serialization_runtime_nativeCompositeEncoder, SharedKotlinx_serialization_runtime_nativeSerialModule, SharedKotlinAnnotation, SharedKotlinx_serialization_runtime_nativeCompositeDecoder, SharedKotlinx_serialization_runtime_nativeSerialModuleCollector, SharedKotlinKClass, SharedKotlinComparable, SharedKotlinKDeclarationContainer, SharedKotlinKAnnotatedElement, SharedKotlinKClassifier;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -141,12 +141,69 @@ __attribute__((swift_name("KotlinBoolean")))
 + (instancetype)numberWithBool:(BOOL)value;
 @end;
 
+__attribute__((swift_name("Sqldelight_runtimeTransacter")))
+@protocol SharedSqldelight_runtimeTransacter
+@required
+- (void)transactionNoEnclosing:(BOOL)noEnclosing body:(SharedKotlinUnit *(^)(SharedSqldelight_runtimeTransacterTransaction *))body __attribute__((swift_name("transaction(noEnclosing:body:)")));
+@end;
+
+__attribute__((swift_name("MyDatabase")))
+@protocol SharedMyDatabase <SharedSqldelight_runtimeTransacter>
+@required
+@property (readonly) id<SharedPersonQueries> personQueries __attribute__((swift_name("personQueries")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("MyDatabaseCompanion")))
+@interface SharedMyDatabaseCompanion : KotlinBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+- (id<SharedMyDatabase>)invokeDriver:(id<SharedSqldelight_runtimeSqlDriver>)driver __attribute__((swift_name("invoke(driver:)")));
+@property (readonly) id<SharedSqldelight_runtimeSqlDriverSchema> Schema __attribute__((swift_name("Schema")));
+@end;
+
+__attribute__((swift_name("Person")))
+@protocol SharedPerson
+@required
+@property (readonly) int64_t id __attribute__((swift_name("id")));
+@property (readonly) NSString * _Nullable name __attribute__((swift_name("name")));
+@property (readonly) NSString * _Nullable genre __attribute__((swift_name("genre")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("PersonImpl")))
+@interface SharedPersonImpl : KotlinBase <SharedPerson>
+- (instancetype)initWithId:(int64_t)id name:(NSString * _Nullable)name genre:(NSString * _Nullable)genre __attribute__((swift_name("init(id:name:genre:)"))) __attribute__((objc_designated_initializer));
+- (int64_t)component1 __attribute__((swift_name("component1()")));
+- (NSString * _Nullable)component2 __attribute__((swift_name("component2()")));
+- (NSString * _Nullable)component3 __attribute__((swift_name("component3()")));
+- (SharedPersonImpl *)doCopyId:(int64_t)id name:(NSString * _Nullable)name genre:(NSString * _Nullable)genre __attribute__((swift_name("doCopy(id:name:genre:)")));
+@end;
+
+__attribute__((swift_name("PersonQueries")))
+@protocol SharedPersonQueries <SharedSqldelight_runtimeTransacter>
+@required
+- (SharedSqldelight_runtimeQuery *)selectAllMapper:(id (^)(SharedLong *, NSString * _Nullable, NSString * _Nullable))mapper __attribute__((swift_name("selectAll(mapper:)")));
+- (SharedSqldelight_runtimeQuery *)selectAll __attribute__((swift_name("selectAll()")));
+- (void)insertItemName:(NSString * _Nullable)name genre:(NSString * _Nullable)genre __attribute__((swift_name("insertItem(name:genre:)")));
+@end;
+
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Greeting")))
 @interface SharedGreeting : KotlinBase
 - (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
 + (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
 - (NSString *)greeting __attribute__((swift_name("greeting()")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("Database")))
+@interface SharedDatabase : KotlinBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)database __attribute__((swift_name("init()")));
+- (id<SharedMyDatabase>)connection __attribute__((swift_name("connection()")));
 @end;
 
 __attribute__((swift_name("KotlinThrowable")))
@@ -177,6 +234,25 @@ __attribute__((swift_name("GitHubApi")))
 @interface SharedGitHubApi : KotlinBase
 - (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
 + (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("PersonDao")))
+@interface SharedPersonDao : KotlinBase
+- (instancetype)initWithDatabase:(id<SharedMyDatabase>)database __attribute__((swift_name("init(database:)"))) __attribute__((objc_designated_initializer));
+- (void)insertPerson:(SharedPersonDto *)person __attribute__((swift_name("insert(person:)")));
+- (NSArray<id<SharedPerson>> *)select __attribute__((swift_name("select()")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("PersonDto")))
+@interface SharedPersonDto : KotlinBase
+- (instancetype)initWithName:(NSString *)name genre:(NSString *)genre __attribute__((swift_name("init(name:genre:)"))) __attribute__((objc_designated_initializer));
+- (NSString *)component1 __attribute__((swift_name("component1()")));
+- (NSString *)component2 __attribute__((swift_name("component2()")));
+- (SharedPersonDto *)doCopyName:(NSString *)name genre:(NSString *)genre __attribute__((swift_name("doCopy(name:genre:)")));
+@property (readonly) NSString *name __attribute__((swift_name("name")));
+@property (readonly) NSString *genre __attribute__((swift_name("genre")));
 @end;
 
 __attribute__((swift_name("BaseView")))
@@ -292,6 +368,68 @@ __attribute__((swift_name("IosKt")))
 @end;
 
 __attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("MyDatabaseKt")))
+@interface SharedMyDatabaseKt : KotlinBase
++ (id<SharedMyDatabase>)createDatabaseDriver:(id<SharedSqldelight_runtimeSqlDriver>)driver __attribute__((swift_name("createDatabase(driver:)")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("KotlinUnit")))
+@interface SharedKotlinUnit : KotlinBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)unit __attribute__((swift_name("init()")));
+@end;
+
+__attribute__((swift_name("Sqldelight_runtimeTransacterTransaction")))
+@interface SharedSqldelight_runtimeTransacterTransaction : KotlinBase
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
++ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+- (void)afterCommitFunction:(SharedKotlinUnit *(^)(void))function __attribute__((swift_name("afterCommit(function:)")));
+- (void)afterRollbackFunction:(SharedKotlinUnit *(^)(void))function __attribute__((swift_name("afterRollback(function:)")));
+- (void)endTransactionSuccessful:(BOOL)successful __attribute__((swift_name("endTransaction(successful:)")));
+- (void)rollback __attribute__((swift_name("rollback()")));
+- (void)transactionBody:(SharedKotlinUnit *(^)(SharedSqldelight_runtimeTransacterTransaction *))body __attribute__((swift_name("transaction(body:)")));
+@property (readonly) SharedSqldelight_runtimeTransacterTransaction * _Nullable enclosingTransaction __attribute__((swift_name("enclosingTransaction")));
+@end;
+
+__attribute__((swift_name("Sqldelight_runtimeCloseable")))
+@protocol SharedSqldelight_runtimeCloseable
+@required
+- (void)close __attribute__((swift_name("close()")));
+@end;
+
+__attribute__((swift_name("Sqldelight_runtimeSqlDriver")))
+@protocol SharedSqldelight_runtimeSqlDriver <SharedSqldelight_runtimeCloseable>
+@required
+- (SharedSqldelight_runtimeTransacterTransaction * _Nullable)currentTransaction __attribute__((swift_name("currentTransaction()")));
+- (void)executeIdentifier:(SharedInt * _Nullable)identifier sql:(NSString *)sql parameters:(int32_t)parameters binders:(SharedKotlinUnit *(^ _Nullable)(id<SharedSqldelight_runtimeSqlPreparedStatement>))binders __attribute__((swift_name("execute(identifier:sql:parameters:binders:)")));
+- (id<SharedSqldelight_runtimeSqlCursor>)executeQueryIdentifier:(SharedInt * _Nullable)identifier sql:(NSString *)sql parameters:(int32_t)parameters binders:(SharedKotlinUnit *(^ _Nullable)(id<SharedSqldelight_runtimeSqlPreparedStatement>))binders __attribute__((swift_name("executeQuery(identifier:sql:parameters:binders:)")));
+- (SharedSqldelight_runtimeTransacterTransaction *)doNewTransaction __attribute__((swift_name("doNewTransaction()")));
+@end;
+
+__attribute__((swift_name("Sqldelight_runtimeSqlDriverSchema")))
+@protocol SharedSqldelight_runtimeSqlDriverSchema
+@required
+- (void)createDriver:(id<SharedSqldelight_runtimeSqlDriver>)driver __attribute__((swift_name("create(driver:)")));
+- (void)migrateDriver:(id<SharedSqldelight_runtimeSqlDriver>)driver oldVersion:(int32_t)oldVersion newVersion:(int32_t)newVersion __attribute__((swift_name("migrate(driver:oldVersion:newVersion:)")));
+@property (readonly) int32_t version __attribute__((swift_name("version")));
+@end;
+
+__attribute__((swift_name("Sqldelight_runtimeQuery")))
+@interface SharedSqldelight_runtimeQuery : KotlinBase
+- (instancetype)initWithQueries:(NSMutableArray<SharedSqldelight_runtimeQuery *> *)queries mapper:(id (^)(id<SharedSqldelight_runtimeSqlCursor>))mapper __attribute__((swift_name("init(queries:mapper:)"))) __attribute__((objc_designated_initializer));
+- (void)addListenerListener:(id<SharedSqldelight_runtimeQueryListener>)listener __attribute__((swift_name("addListener(listener:)")));
+- (id<SharedSqldelight_runtimeSqlCursor>)execute __attribute__((swift_name("execute()")));
+- (NSArray<id> *)executeAsList __attribute__((swift_name("executeAsList()")));
+- (id)executeAsOne __attribute__((swift_name("executeAsOne()")));
+- (id _Nullable)executeAsOneOrNull __attribute__((swift_name("executeAsOneOrNull()")));
+- (void)notifyDataChanged __attribute__((swift_name("notifyDataChanged()")));
+- (void)removeListenerListener:(id<SharedSqldelight_runtimeQueryListener>)listener __attribute__((swift_name("removeListener(listener:)")));
+@property (readonly) id (^mapper)(id<SharedSqldelight_runtimeSqlCursor>) __attribute__((swift_name("mapper")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("KotlinArray")))
 @interface SharedKotlinArray : KotlinBase
 + (instancetype)arrayWithSize:(int32_t)size init:(id _Nullable (^)(SharedInt *))init __attribute__((swift_name("init(size:init:)")));
@@ -310,14 +448,6 @@ __attribute__((swift_name("KotlinCoroutineContext")))
 - (id<SharedKotlinCoroutineContextElement> _Nullable)getKey:(id<SharedKotlinCoroutineContextKey>)key __attribute__((swift_name("get(key:)")));
 - (id<SharedKotlinCoroutineContext>)minusKeyKey:(id<SharedKotlinCoroutineContextKey>)key __attribute__((swift_name("minusKey(key:)")));
 - (id<SharedKotlinCoroutineContext>)plusContext:(id<SharedKotlinCoroutineContext>)context __attribute__((swift_name("plus(context:)")));
-@end;
-
-__attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("KotlinUnit")))
-@interface SharedKotlinUnit : KotlinBase
-+ (instancetype)alloc __attribute__((unavailable));
-+ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
-+ (instancetype)unit __attribute__((swift_name("init()")));
 @end;
 
 __attribute__((swift_name("Kotlinx_serialization_runtime_nativeEncoder")))
@@ -383,11 +513,36 @@ __attribute__((swift_name("Kotlinx_serialization_runtime_nativeDecoder")))
 @property (readonly) SharedKotlinx_serialization_runtime_nativeUpdateMode *updateMode __attribute__((swift_name("updateMode")));
 @end;
 
+__attribute__((swift_name("Sqldelight_runtimeSqlPreparedStatement")))
+@protocol SharedSqldelight_runtimeSqlPreparedStatement
+@required
+- (void)bindBytesIndex:(int32_t)index value:(SharedKotlinByteArray * _Nullable)value __attribute__((swift_name("bindBytes(index:value:)")));
+- (void)bindDoubleIndex:(int32_t)index value:(SharedDouble * _Nullable)value __attribute__((swift_name("bindDouble(index:value:)")));
+- (void)bindLongIndex:(int32_t)index value:(SharedLong * _Nullable)value __attribute__((swift_name("bindLong(index:value:)")));
+- (void)bindStringIndex:(int32_t)index value:(NSString * _Nullable)value __attribute__((swift_name("bindString(index:value:)")));
+@end;
+
+__attribute__((swift_name("Sqldelight_runtimeSqlCursor")))
+@protocol SharedSqldelight_runtimeSqlCursor <SharedSqldelight_runtimeCloseable>
+@required
+- (SharedKotlinByteArray * _Nullable)getBytesIndex:(int32_t)index __attribute__((swift_name("getBytes(index:)")));
+- (SharedDouble * _Nullable)getDoubleIndex:(int32_t)index __attribute__((swift_name("getDouble(index:)")));
+- (SharedLong * _Nullable)getLongIndex:(int32_t)index __attribute__((swift_name("getLong(index:)")));
+- (NSString * _Nullable)getStringIndex:(int32_t)index __attribute__((swift_name("getString(index:)")));
+- (BOOL)next __attribute__((swift_name("next()")));
+@end;
+
+__attribute__((swift_name("Sqldelight_runtimeQueryListener")))
+@protocol SharedSqldelight_runtimeQueryListener
+@required
+- (void)queryResultsChanged __attribute__((swift_name("queryResultsChanged()")));
+@end;
+
 __attribute__((swift_name("KotlinIterator")))
 @protocol SharedKotlinIterator
 @required
 - (BOOL)hasNext __attribute__((swift_name("hasNext()")));
-- (id _Nullable)next __attribute__((swift_name("next()")));
+- (id _Nullable)next_ __attribute__((swift_name("next_()")));
 @end;
 
 __attribute__((swift_name("KotlinCoroutineContextElement")))
@@ -511,6 +666,19 @@ __attribute__((swift_name("Kotlinx_serialization_runtime_nativeUpdateMode")))
 - (int32_t)compareToOther:(SharedKotlinx_serialization_runtime_nativeUpdateMode *)other __attribute__((swift_name("compareTo(other:)")));
 @end;
 
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("KotlinByteArray")))
+@interface SharedKotlinByteArray : KotlinBase
++ (instancetype)arrayWithSize:(int32_t)size __attribute__((swift_name("init(size:)")));
++ (instancetype)arrayWithSize:(int32_t)size init:(SharedByte *(^)(SharedInt *))init __attribute__((swift_name("init(size:init:)")));
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
+- (int8_t)getIndex:(int32_t)index __attribute__((swift_name("get(index:)")));
+- (SharedKotlinByteIterator *)iterator __attribute__((swift_name("iterator()")));
+- (void)setIndex:(int32_t)index value:(int8_t)value __attribute__((swift_name("set(index:value:)")));
+@property (readonly) int32_t size __attribute__((swift_name("size")));
+@end;
+
 __attribute__((swift_name("Kotlinx_serialization_runtime_nativeSerialModuleCollector")))
 @protocol SharedKotlinx_serialization_runtime_nativeSerialModuleCollector
 @required
@@ -539,6 +707,14 @@ __attribute__((swift_name("KotlinKClass")))
 - (BOOL)isInstanceValue:(id _Nullable)value __attribute__((swift_name("isInstance(value:)")));
 @property (readonly) NSString * _Nullable qualifiedName __attribute__((swift_name("qualifiedName")));
 @property (readonly) NSString * _Nullable simpleName __attribute__((swift_name("simpleName")));
+@end;
+
+__attribute__((swift_name("KotlinByteIterator")))
+@interface SharedKotlinByteIterator : KotlinBase <SharedKotlinIterator>
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
++ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
+- (SharedByte *)next_ __attribute__((swift_name("next_()")));
+- (int8_t)nextByte __attribute__((swift_name("nextByte()")));
 @end;
 
 NS_ASSUME_NONNULL_END
